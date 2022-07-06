@@ -18,7 +18,7 @@ router.put("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.userId === req.params.userId) {
+    if (post.userId === req.body.userId) {
       await post.updateOne({ $set: req.body });
       res.status(200).json("The post has been updated");
     } else {
@@ -26,6 +26,7 @@ router.put("/:id", async (req, res) => {
     }
   } catch (err) {
     res.status(500).json(err);
+    console.log(err);
   }
 });
 
@@ -34,7 +35,7 @@ router.delete("/:id", async (req, res) => {
   try {
     const post = await Post.findById(req.params.id);
 
-    if (post.userId === req.params.userId) {
+    if (post.userId === req.body.userId) {
       await post.deleteOne();
       res.status(200).json("The post has been deleted");
     } else {
@@ -77,15 +78,15 @@ router.get("/:id", async (req, res) => {
 router.get("/timeline/:userId", async (req, res) => {
   try {
     const currentUser = await User.findById(req.params.userId);
-    const userPost = await Post.find({ userId: currentUser._id });
+    const userPosts = await Post.find({ userId: currentUser._id });
 
-    const friendsPost = await Promise.all(
+    const friendsPosts = await Promise.all(
       currentUser.followings.map((friendId) => {
         return Post.find({ userId: friendId });
       })
     );
 
-    res.status(200).json(userPost.concat(...friendsPost));
+    res.status(200).json(userPosts.concat(...friendsPosts));
   } catch (err) {
     res.status(500).json(err);
   }
@@ -94,7 +95,7 @@ router.get("/timeline/:userId", async (req, res) => {
 //Get user's all posts
 router.get("/profile/:username", async (req, res) => {
   try {
-    const user = await User.findOne({ usernmae: req.params.username })
+    const user = await User.findOne({ username: req.params.username })
     const posts = await Post.find({ userId: user._id })
     res.status(200).json(posts)
   } catch (err) {

@@ -1,23 +1,23 @@
 import love from "../../assets/img/icons/love.png";
 import likes from "../../assets/img/icons/like.png";
-import nouser from "../../assets/img/persons/nouser.png"
+import nouser from "../../assets/img/persons/nouser.png";
 import MoreVertSharp from "@mui/icons-material/MoreVert";
 
-import { useState, useEffect } from "react"
-import { Link } from "react-router-dom"
+import { useState, useEffect, useContext } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { Link } from "react-router-dom";
 
 import "./post.css";
-
-import axios from "axios"
-import { format } from "timeago.js"
+import axios from "axios";
+import { format } from "timeago.js";
 
 export function Post({ post }) {
 
   const url = "https://localhost:4000/api/"
 
   const [user, setUser] = useState({});
-  const [isLiked, setIsLiked] = useState(false)
-  const [like, setLike] = useState(post.likes.length)
+  const [isLiked, setIsLiked] = useState(false);
+  const [like, setLike] = useState(post.likes.length);
   const { user: currentUser } = useContext(AuthContext);
 
   useEffect(() => {
@@ -26,17 +26,19 @@ export function Post({ post }) {
 
   useEffect(() => {
     const fetchUser = async () => {
-      const res = await axios.get(`/users?userId=${post.userId}`)
+      const res =
+        await axios.get(`${url}users?userId=${post.userId}`)
       setUser(res.data);
     }
     fetchUser()
-  }, [post.userId])
+  }, [currentUser._id, post.userId])
 
   const likeHandler = () => {
     try {
-      axios.put(`${url}/posts/${post.id}/like`, { userId: currentUser._id })
+      axios.put(`${url}/posts/${post.id}/like`,
+        { userId: person._id })
     } catch (err) {
-
+      console.log("Post error" + err);
     }
     setLike(isLiked ? like - 1 : like + 1)
     setIsLiked(!isLiked)

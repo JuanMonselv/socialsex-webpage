@@ -28,7 +28,7 @@ const storage = multer.diskStorage({
   }
 })
 
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 //Route to upload files (just images)
 app.post("/api/upload", upload.single("file"), (req, res) => {

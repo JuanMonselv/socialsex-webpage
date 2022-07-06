@@ -4,15 +4,22 @@ import AuthReducer from "./AuthReducer";
 const INITIAL_STATE = {
     //user: null,
     //Initialized user to avoid login every time
+    // user: {
+    //     _id: "62bdf4b7d9eaf97bbcdc7e5e",
+    //     username: "rios",
+    //     email: "rios@mail.com",
+    //     profilePicture: "",
+    //     coverPicture: "",
+    //     followers: [],
+    //     followings: [],
+    // },
+
     user: {
-        _id: "62bdf4b7d9eaf97bbcdc7e5e",
-        username: "rios",
-        email: "rios@mail.com",
-        // password: "$2b$10$ZqlQly6IaZYYJVeo97HCk.URXFPp.2BKHYpaRQgAJybwyp.Up4MSW",
+        _id: "62c4df52dd3637bcb693c537",
+        username: "john",
+        email: "john@mail.com",
         profilePicture: "",
         coverPicture: "",
-        followers: [],
-        followings: [],
     },
     isFetching: false,
     error: false,

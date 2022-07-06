@@ -1,11 +1,11 @@
 import emoji from "../../assets/img/icons/emoji.png";
 import picture from "../../assets/img/icons/picture.png";
-import nouser from "../../assets/img/persons/nouser.png"
+import nouser from "../../assets/img/persons/nouser.png";
 
-import { AuthContext } from "../../context/AuthContext"
-import { useContext, useState, useRef } from 'react'
+import { AuthContext } from "../../context/AuthContext";
+import { useContext, useState, useRef } from 'react';
 
-import axios from "axios"
+import axios from "axios";
 import "./share.css";
 
 export function Share() {
@@ -16,6 +16,7 @@ export function Share() {
 
   const url = "http://localhost:4000/api/"
 
+  //send a post to the server
   const handleSubmit = async (e) => {
     e.preventDefault()
 
@@ -24,6 +25,7 @@ export function Share() {
       desc: desc.current.value,
     }
 
+    //Check if there's a file
     if (file) {
       const data = new FormData()
       const fileName = Date.now() + file.name
@@ -32,7 +34,7 @@ export function Share() {
       newPost.img = fileName
 
       try {
-        //Send image to post server if there's a image file 
+        //Send image if there's a image file 
         await axios.post(`${url}upload`, data)
       } catch (err) {
         console.log("This is the error 11: " + err);
@@ -80,19 +82,28 @@ export function Share() {
               <input
                 type="file"
                 id="file"
-                accept=".png,.jpeg,.jng"
+                accept=".png,.jpeg,.jpg"
                 style={{ display: 'none' }}
                 onChange={(e) => setFile(e.target.files[0])}
               />
             </label>
 
             <div className="shareOpcion">
-              <img className="shareIcon" src={emoji} alt="" />
+              <img
+                className="shareIcon"
+                src={emoji}
+                alt=""
+              />
+
               <span className="shareOptionText"></span>
             </div>
 
             <div className="shareOpcion">
-              <img className="shareIcon" src={picture} alt="" />
+              <img
+                className="shareIcon"
+                src={picture}
+                alt=""
+              />
               <span className="shareOptionText"></span>
             </div>
 

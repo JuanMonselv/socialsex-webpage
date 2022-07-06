@@ -16,10 +16,11 @@ export function Profile() {
 
     const [user, setUser] = useState({});
     const username = useParams().username;
+    const url = "http://localhost:4000/api/"
 
     useEffect(() => {
         const fetchUser = async () => {
-            const res = await axios.get(`/users?username=${username}`)
+            const res = await axios.get(`${url}users?username=${username}`)
             setUser(res.data);
         }
         fetchUser()
