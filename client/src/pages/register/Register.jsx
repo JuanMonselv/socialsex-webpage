@@ -5,7 +5,6 @@ import "./register.css"
 import axios from "axios"
 
 export function Register() {
-
     const email = useRef();
     const password = useRef();
     const username = useRef();

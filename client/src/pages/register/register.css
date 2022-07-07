@@ -1,7 +1,9 @@
 .register {
+
     width: 100vw;
     height: 100vh;
     background-color: #f0f2f5;
+    background-image: url("../../assets/img/login/bgImg.jpg");
     background-size: cover;
     background-repeat: no-repeat;
     display: flex;
