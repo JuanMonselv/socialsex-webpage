@@ -5,12 +5,18 @@ import nouser from "../../assets/img/persons/nouser.png"
 import { Users } from "../../dummyData"
 import { Online } from "../online/Online"
 
-import { useEffect, useState } from 'react';
+import { Link } from "react-router-dom";
+
+import { useEffect, useState, useContext } from 'react';
+import { AuthContext } from "../../context/AuthContext"
+
 import "./rightbar.css";
 import axios from "axios"
 
 export function Rightbar({ user }) {
   const url = "http://localhost:4000/api/users/"
+
+  const { user: currentUser } = useContext(AuthContext)
 
   const [friends, setFriends] = useState([])
 
@@ -26,6 +32,14 @@ export function Rightbar({ user }) {
     }
     getFriends()
   }, [user._id])
+
+  const handleClick = async () => {
+    try {
+
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   const HomeRightbar = () => {
     return (
@@ -57,6 +71,15 @@ export function Rightbar({ user }) {
   const ProfileRightbar = () => {
     return (
       <>
+        {user.username !== currentUser.username && (
+
+          <button
+            className="rightbarFollowButton"
+            onClick={handleClick}
+          >
+            Follow +
+          </button>
+        )}
         <h4 className="rightbarTitle">User Information</h4>
 
         <div className="rightbarInfo">
@@ -87,21 +110,26 @@ export function Rightbar({ user }) {
 
         <div className="righbarFollowings">
           {friends.map((friend) => (
-            <div key={user._id} className="rightbarFollowing">
-              <img
-                src={
-                  friend.profilePicture
-                    ? friend.profilePicture
-                    : nouser
-                }
-                className="rightbarFollowingImg"
-                alt=""
-              />
-              <span
-                className="rightbarFollowingName">
-                {friend.username}
-              </span>
-            </div>
+            <Link
+              to={`/profile/${friend.username}`}
+              style={{ textDecoration: 'none' }}
+            >
+              <div key={user._id} className="rightbarFollowing">
+                <img
+                  src={
+                    friend.profilePicture
+                      ? friend.profilePicture
+                      : nouser
+                  }
+                  className="rightbarFollowingImg"
+                  alt=""
+                />
+                <span
+                  className="rightbarFollowingName">
+                  {friend.username}
+                </span>
+              </div>
+            </Link>
           ))}
         </div>
       </>
