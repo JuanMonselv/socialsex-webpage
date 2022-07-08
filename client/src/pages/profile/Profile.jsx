@@ -9,6 +9,7 @@ import { useParams } from "react-router"
 
 import nouser from "../../assets/img/persons/nouser.png"
 import nocover from "../../assets/img/covers/nocover.jpg"
+import axios from "axios"
 
 import "./profile.css"
 

@@ -98,22 +98,6 @@ export function Rightbar({ user }) {
             />
             <span className="rightbarFollowingName">John Carter</span>
           </div>
-
-          <div className="rightbarFollowing">
-            <img src={p3}
-              className="rightbarFollowingImg"
-              alt=""
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
-
-          <div className="rightbarFollowing">
-            <img src={p3}
-              className="rightbarFollowingImg"
-              alt=""
-            />
-            <span className="rightbarFollowingName">John Carter</span>
-          </div>
         </div>
 
       </>

@@ -13,7 +13,7 @@ import { format } from "timeago.js";
 
 export function Post({ post }) {
 
-  const url = "https://localhost:4000/api/"
+  const url = "http://localhost:4000/api/"
 
   const [user, setUser] = useState({});
   const [isLiked, setIsLiked] = useState(false);
@@ -33,10 +33,11 @@ export function Post({ post }) {
     fetchUser()
   }, [currentUser._id, post.userId])
 
+  //Handle like/unlike action when click
   const likeHandler = () => {
     try {
-      axios.put(`${url}/posts/${post.id}/like`,
-        { userId: person._id })
+      axios.put(`${url}posts/${post._id}/like`,
+        { userId: currentUser._id })
     } catch (err) {
       console.log("Post error" + err);
     }
@@ -78,7 +79,7 @@ export function Post({ post }) {
 
           <img
             className="postImg"
-            src={post.img}
+            // src={post.img}
             alt=""
           />
         </div>

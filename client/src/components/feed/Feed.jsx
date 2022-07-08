@@ -29,7 +29,7 @@ export function Feed({ username }) {
       }));
     }
     fetchPosts()
-  }, [username])
+  }, [username, user._id])
 
   return (
     <div className="feed">
