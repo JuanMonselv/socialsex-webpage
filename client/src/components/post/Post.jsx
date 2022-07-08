@@ -12,7 +12,6 @@ import axios from "axios";
 import { format } from "timeago.js";
 
 export function Post({ post }) {
-
   const url = "http://localhost:4000/api/"
 
   const [user, setUser] = useState({});

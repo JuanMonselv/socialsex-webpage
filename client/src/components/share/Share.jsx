@@ -9,7 +9,6 @@ import axios from "axios";
 import "./share.css";
 
 export function Share() {
-
   const { user } = useContext(AuthContext)
   const [file, setFile] = useState(null)
   const desc = useRef()
@@ -37,7 +36,7 @@ export function Share() {
         //Send image if there's a image file 
         await axios.post(`${url}upload`, data)
       } catch (err) {
-        console.log("This is the error 11: " + err);
+        console.log(err);
       }
     }
 
@@ -46,7 +45,7 @@ export function Share() {
       await axios.post(`${url}posts`, newPost)
       window.location.reload()
     } catch (err) {
-      console.log("This is the error 22: " + err);
+      console.log(err);
     }
   }
 

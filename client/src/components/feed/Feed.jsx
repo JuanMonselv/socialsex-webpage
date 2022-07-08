@@ -12,7 +12,6 @@ import { Share } from "../share/Share";
 import { AuthContext } from "../../context/AuthContext"
 
 export function Feed({ username }) {
-
   const url = "http://localhost:4000/api/posts/"
 
   const [posts, setPosts] = useState([]);

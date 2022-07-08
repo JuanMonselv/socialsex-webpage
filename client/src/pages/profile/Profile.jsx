@@ -4,20 +4,20 @@ import { Sidebar } from "../../components/sidebar/Sidebar"
 import { Rightbar } from "../../components/rightbar/Rightbar"
 
 import { useEffect, useState } from "react"
-
 import { useParams } from "react-router"
 
 import nouser from "../../assets/img/persons/nouser.png"
 import nocover from "../../assets/img/covers/nocover.jpg"
-import axios from "axios"
 
+import axios from "axios"
 import "./profile.css"
 
 export function Profile() {
-
     const [user, setUser] = useState({});
     const username = useParams().username;
     const url = "http://localhost:4000/api/"
+
+    console.log("user from Profile: " + user);
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -37,12 +37,18 @@ export function Profile() {
                         <div className="profileCover">
                             <img
                                 className="profileCoverImg"
-                                src={user.coverPicture || nocover}
+                                src={
+                                    user.coverPicture
+                                    || nocover
+                                }
                                 alt=""
                             />
                             <img
                                 className="profileUserImg"
-                                src={user.profilePicture || nouser}
+                                src={
+                                    user.profilePicture
+                                    || nouser
+                                }
                                 alt=""
                             />
                         </div>
